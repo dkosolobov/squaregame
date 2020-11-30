@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript">
+function invert(x, y)
+{
+	var elem = document.getElementById("b" + x + "" + y);
+	if (elem.style.backgroundColor === "black")
+	{
+		elem.style.backgroundColor = "white";
+	}
+	else
+	{
+		elem.style.backgroundColor = "black";
+	}
+}
+function pressBtn(x, y)
+{
+	invert(x, y);
+	for (var i = -1; i <= 1; i += 2)
+	{
+		for (var j = -1; j <= 1; j += 2)
+		{
+			if (x + i > 0 && x + i <= 6 && y + j > 0 && y + j <= 6)
+			{
+				invert(x + i, y + j);
+			}
+		}
+	}
+	var isWin = true;
+	for (var i = 1; i <= 6; i++)
+	{
+		for (var j = 1; j <= 6; j++)
+		{
+			if (document.getElementById("b" + i + "" + j).style.backgroundColor !== "black")
+			{
+				isWin = false;
+			}
+		}
+	}
+	document.getElementById("win-label").textContent = isWin ? "Победа!" : "";
+}
+function resetField()
+{
+	var field = [[0,0,0,0,1,1], 
+				 [1,1,1,1,1,1], 
+				 [1,1,1,1,0,0], 
+				 [0,0,1,1,1,1], 
+				 [1,1,1,1,1,1], 
+				 [1,1,0,0,0,0]];
+	var colors = ["black", "white"];
+	for (var x = 1; x <= 6; x++)
+	{
+		for (var y = 1; y <= 6; y++)
+		{
+			document.getElementById("b" + x + "" + y).style.backgroundColor = colors[field[x - 1][y - 1]];
+		}
+	}
+}
+</script>
+</head>
+<body>
+<center>
+    <h1>Квадратики</h1>
+	Сделайте все чёрными!<br><br>
+	<input type="button" id="b11" onclick="pressBtn(1,1)">
+	<input type="button" id="b12" onclick="pressBtn(1,2)">
+	<input type="button" id="b13" onclick="pressBtn(1,3)">
+	<input type="button" id="b14" onclick="pressBtn(1,4)">
+	<input type="button" id="b15" onclick="pressBtn(1,5)">
+    <input type="button" id="b16" onclick="pressBtn(1,6)"><br>
+	<input type="button" id="b21" onclick="pressBtn(2,1)">
+	<input type="button" id="b22" onclick="pressBtn(2,2)">
+	<input type="button" id="b23" onclick="pressBtn(2,3)">
+	<input type="button" id="b24" onclick="pressBtn(2,4)">
+	<input type="button" id="b25" onclick="pressBtn(2,5)">
+    <input type="button" id="b26" onclick="pressBtn(2,6)"><br>
+	<input type="button" id="b31" onclick="pressBtn(3,1)">
+	<input type="button" id="b32" onclick="pressBtn(3,2)">
+	<input type="button" id="b33" onclick="pressBtn(3,3)">
+	<input type="button" id="b34" onclick="pressBtn(3,4)">
+	<input type="button" id="b35" onclick="pressBtn(3,5)">
+    <input type="button" id="b36" onclick="pressBtn(3,6)"><br>
+	<input type="button" id="b41" onclick="pressBtn(4,1)">
+	<input type="button" id="b42" onclick="pressBtn(4,2)">
+	<input type="button" id="b43" onclick="pressBtn(4,3)">
+	<input type="button" id="b44" onclick="pressBtn(4,4)">
+	<input type="button" id="b45" onclick="pressBtn(4,5)">
+    <input type="button" id="b46" onclick="pressBtn(4,6)"><br>
+	<input type="button" id="b51" onclick="pressBtn(5,1)">
+	<input type="button" id="b52" onclick="pressBtn(5,2)">
+	<input type="button" id="b53" onclick="pressBtn(5,3)">
+	<input type="button" id="b54" onclick="pressBtn(5,4)">
+	<input type="button" id="b55" onclick="pressBtn(5,5)">
+    <input type="button" id="b56" onclick="pressBtn(5,6)"><br>
+	<input type="button" id="b61" onclick="pressBtn(6,1)">
+	<input type="button" id="b62" onclick="pressBtn(6,2)">
+	<input type="button" id="b63" onclick="pressBtn(6,3)">
+	<input type="button" id="b64" onclick="pressBtn(6,4)">
+	<input type="button" id="b65" onclick="pressBtn(6,5)">
+    <input type="button" id="b66" onclick="pressBtn(6,6)"><br><br>
+	<input type="button" value="Заново" onclick="resetField()" />
+	<h2 id="win-label"></h2>
+</center>
+<script type="text/javascript"> 
+resetField();
+</script>
+</body>
+</html>
